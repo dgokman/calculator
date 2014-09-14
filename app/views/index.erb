@@ -11,16 +11,16 @@
    <br>
 
    <div id="screen">
-   <% if @plus.nil? %>
+   <% if @number.nil? %>
    <% Number.all.each do |number| %>
    <%= number.number %>
    <% end %>
    <% end %>
-   <% if @plus %>
-   <%= @plus %>
+   <% if @number %>
+   <%= @number %>
    <% end %>
    <% if @result %>
-   <%= @result %>
+   <%= @result.to_f %>
    <% end %>
    <form action="/clear" method="post">
     <input type="submit" value="clear"/>
@@ -28,8 +28,17 @@
    <form action="/plus" method="post">
     <input type="submit" value="+"/>
    </form>
-    <form action="/equal" method="post">
+   <form action="/equal" method="post">
     <input type="submit" value="="/>
+   </form>
+   <form action="/minus" method="post">
+    <input type="submit" value="-"/>
+   </form>
+   <form action="times" method="post">
+    <input type="submit" value="*"/>
+   </form>
+   <form action="divide" method="post">
+    <input type="submit" value="/"/>
    </form>
    </div>
    <form action="/1" method="post">
