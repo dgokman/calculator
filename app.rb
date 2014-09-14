@@ -34,7 +34,14 @@ post '/plus' do
 end
 
 post '/equal' do
-  @result = Operator.first.value + Operator.second.value
+  counter = 0
+  @result = 0
+  while counter < Operator.all.length
+    @result += Operator.order("id DESC").offset(counter).limit(1).first.value
+    counter += 1
+  end
+  @result
+  Operator.delete_all(category: "value")
   erb :index
 end
 
