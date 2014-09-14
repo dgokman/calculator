@@ -1,19 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Calculator</title>
 
-    <link rel="stylesheet" href="/styles.css">
-  </head>
+   <div id="calculator">
 
-   <body>
-   <br>
 
    <div id="screen">
    <% if @number.nil? %>
-   <% Number.all.each do |number| %>
+   <% Number.limit(9).each do |number| %>
+   <span id="number">
    <%= number.number %>
+   </span>
    <% end %>
    <% end %>
    <% if @number %>
@@ -22,57 +16,76 @@
    <% if @result %>
    <%= @result.to_f %>
    <% end %>
-   <form action="/clear" method="post">
-    <input type="submit" value="clear"/>
-   </form>
-   <form action="/plus" method="post">
-    <input type="submit" value="+"/>
-   </form>
-   <form action="/equal" method="post">
-    <input type="submit" value="="/>
-   </form>
-   <form action="/minus" method="post">
-    <input type="submit" value="-"/>
-   </form>
-   <form action="times" method="post">
-    <input type="submit" value="*"/>
-   </form>
-   <form action="divide" method="post">
-    <input type="submit" value="/"/>
-   </form>
    </div>
-   <form action="/1" method="post">
-    <input type="submit" value="1"/>
-   </form>
-   <form action="/2" method="post">
-    <input type="submit" value="2"/>
-   </form>
-   <form action="/3" method="post">
-    <input type="submit" value="3"/>
-   </form>
-   <form action="/4" method="post">
-    <input type="submit" value="4"/>
-   </form>
-   <form action="/5" method="post">
-    <input type="submit" value="5"/>
-   </form>
-   <form action="/6" method="post">
-    <input type="submit" value="6"/>
-   </form>
+
+
+   <div id="top_line">
    <form action="/7" method="post">
-    <input type="submit" value="7"/>
+    <input class="button" type="submit" value="7"/>
    </form>
    <form action="/8" method="post">
-    <input type="submit" value="8"/>
+    <input class="button" type="submit" value="8"/>
    </form>
    <form action="/9" method="post">
-    <input type="submit" value="9"/>
+    <input class="button" type="submit" value="9"/>
    </form>
+    <form action="divide" method="post">
+    <input class="button" type="submit" value="/"/>
+   </form>
+   </div>
+
+   <div id="second_line">
+   <form action="/4" method="post">
+    <input class="button" type="submit" value="4"/>
+   </form>
+   <form action="/5" method="post">
+    <input class="button" type="submit" value="5"/>
+   </form>
+   <form action="/6" method="post">
+    <input class="button" type="submit" value="6"/>
+   </form>
+    <form action="times" method="post">
+    <input class="button" type="submit" value="*"/>
+   </form>
+   </div>
+
+   <div id="third_line">
+   <form action="/1" method="post">
+    <input class="button" type="submit" value="1"/>
+   </form>
+   <form action="/2" method="post">
+    <input class="button" type="submit" value="2"/>
+   </form>
+   <form action="/3" method="post">
+    <input class="button" type="submit" value="3"/>
+   </form>
+    <form action="/minus" method="post">
+    <input class="button" type="submit" value="-"/>
+   </form>
+   </div>
+
+   <div id="fourth_line">
    <form action="/0" method="post">
-    <input type="submit" value="0"/>
+    <input class="button" type="submit" value="0"/>
    </form>
+   <form action="/dec" method="post">
+    <input class="button" type="submit" value="."/>
+   </form>
+   <form action="/equal" method="post">
+    <input class="button" type="submit" value="="/>
+   </form>
+   <form action="/plus" method="post">
+    <input class="button" type="submit" value="+"/>
+   </form>
+   </div>
+
+   <div id="fifth_line">
+   <form action="/clear" method="post">
+    <input class="button" type="submit" value="clear"/>
+   </form>
+   </div>
+
+   </div>
 
 
-  </body>
-</html>
 
