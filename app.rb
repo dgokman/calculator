@@ -1,5 +1,7 @@
 require 'sinatra'
 require 'sinatra/activerecord'
+require 'sinatra/reloader'
+require 'pry'
 
 configure do
   set :views, 'app/views'
@@ -10,6 +12,19 @@ Dir[File.join(File.dirname(__FILE__), 'app', '**', '*.rb')].each do |file|
 end
 
 get '/' do
-  @title = "Hello World"
   erb :index
 end
+
+post '/clear' do
+  Number.delete_all(category: "number")
+  erb :index
+end
+
+
+post '/:number' do
+  @numbers = Number.create(number: params[:number], category: "number")
+  @numbers.save
+  erb :index
+end
+
+

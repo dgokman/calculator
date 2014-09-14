@@ -1,1 +1,62 @@
-<h1><%= @title %></h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Calculator</title>
+
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+
+   <body>
+   <br>
+
+   <div id="screen">
+   <% Number.all.each do |number| %>
+   <%= number.number %>
+   <% end %>
+   <form action="/clear" method="post">
+    <input type="submit" value="clear"/>
+   </form>
+   </div>
+   <form action="/1" method="post">
+    <input type="submit" value="1"/>
+   </form>
+   <form action="/2" method="post">
+    <input type="submit" value="2"/>
+   </form>
+   <form action="/3" method="post">
+    <input type="submit" value="3"/>
+   </form>
+   <form action="/4" method="post">
+    <input type="submit" value="4"/>
+   </form>
+   <form action="/5" method="post">
+    <input type="submit" value="5"/>
+   </form>
+   <form action="/6" method="post">
+    <input type="submit" value="6"/>
+   </form>
+   <form action="/7" method="post">
+    <input type="submit" value="7"/>
+   </form>
+   <form action="/8" method="post">
+    <input type="submit" value="8"/>
+   </form>
+   <form action="/9" method="post">
+    <input type="submit" value="9"/>
+   </form>
+   <form action="/0" method="post">
+    <input type="submit" value="0"/>
+   </form>
+
+   <form action="/+" method="post">
+    <input type="submit" value="+"/>
+    <input type="submit" value="-"/>
+    <input type="submit" value="*"/>
+    <input type="submit" value="/"/>
+   </form>
+
+
+  </body>
+</html>
+
