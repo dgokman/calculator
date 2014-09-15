@@ -12,7 +12,6 @@ Dir[File.join(File.dirname(__FILE__), 'app', '**', '*.rb')].each do |file|
 end
 
 get '/' do
-  Number.create(number: "", category: "number")
   erb :index
 end
 
