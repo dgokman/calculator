@@ -24,7 +24,7 @@ post '/plus' do
   numbers = []
   Number.all.each do |number|
     numbers << number.number
-    @number = numbers.join.to_i
+    @number = numbers.join.to_f
   end
   @operators = Operator.create(value: @number, category: "plus")
   @operators.save
@@ -36,7 +36,7 @@ post '/minus' do
   numbers = []
   Number.all.each do |number|
     numbers << number.number
-    @number = numbers.join.to_i
+    @number = numbers.join.to_f
   end
   @operators = Operator.create(value: @number, category: "minus")
   @operators.save
@@ -48,7 +48,7 @@ post '/times' do
   numbers = []
   Number.all.each do |number|
     numbers << number.number
-    @number = numbers.join.to_i
+    @number = numbers.join.to_f
   end
   @operators = Operator.create(value: @number, category: "times")
   @operators.save
@@ -100,8 +100,12 @@ post '/equal' do
 end
 
 post '/:number' do
-  @numbers = Number.create(number: params[:number], category: "number")
-  @numbers.save
+  if params[:number] == "decimal"
+    numbers = Number.create(number: ".", category: "number")
+  else
+    numbers = Number.create(number: params[:number], category: "number")
+  end
+  numbers.save
   erb :index
 end
 

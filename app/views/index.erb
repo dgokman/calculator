@@ -14,7 +14,7 @@
    <%= @number.to_f %>
    <% end %>
    <% if @result %>
-   <%= @result.to_f %>
+   <%= @result.to_f.round(8) %>
    <% end %>
    </div>
 
@@ -68,7 +68,7 @@
    <form action="/0" method="post">
     <input class="button" type="submit" value="0"/>
    </form>
-   <form action="/dec" method="post">
+   <form action="/decimal" method="post">
     <input class="button" type="submit" value="."/>
    </form>
    <form action="/equal" method="post">

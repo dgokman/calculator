@@ -11,19 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140914074143) do
+ActiveRecord::Schema.define(version: 20140915010019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "decimals", force: true do |t|
+    t.string "value", null: false
+  end
+
   create_table "numbers", force: true do |t|
-    t.integer "number",   null: false
-    t.string  "category", null: false
+    t.string "number",   null: false
+    t.string "category", null: false
   end
 
   create_table "operators", force: true do |t|
-    t.integer "value",    null: false
-    t.string  "category", null: false
+    t.float  "value",    null: false
+    t.string "category", null: false
   end
 
 end
