@@ -12,11 +12,13 @@ Dir[File.join(File.dirname(__FILE__), 'app', '**', '*.rb')].each do |file|
 end
 
 get '/' do
+  Number.create(number: "", category: "number")
   erb :index
 end
 
 post '/clear' do
   Number.delete_all(category: "number")
+  Operator.destroy_all
   erb :index
 end
 
@@ -94,8 +96,13 @@ post '/equal' do
      counter += 1
     end
   end
-
+  @result_display = @result
   Operator.destroy_all
+  results = @result.to_s.split("")
+  results.each do |result|
+    numbers = Number.create(number: result, category: "number")
+    numbers.save
+  end
   erb :index
 end
 
