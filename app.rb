@@ -11,6 +11,32 @@ Dir[File.join(File.dirname(__FILE__), 'app', '**', '*.rb')].each do |file|
   require file
 end
 
+def number_nil
+  numbers = Operator.last.value.to_s.split
+  numbers.each do |number|
+    numbers = Number.create(number: number, category: "number")
+    numbers.save
+  end
+  @number = numbers.number.to_f
+end
+
+def operators
+  numbers = []
+  Number.all.each do |number|
+    numbers << number.number
+    @number = numbers.join.to_f
+  end
+  if @number.nil?
+    number_nil
+  else
+    @operators = Operator.create(value: @number, category: params[:number])
+    @operators.save
+  end
+  Number.delete_all(category: "number")
+  erb :index
+end
+
+
 get '/' do
   erb :index
 end
@@ -21,53 +47,6 @@ post '/clear' do
   erb :index
 end
 
-post '/plus' do
-  numbers = []
-  Number.all.each do |number|
-    numbers << number.number
-    @number = numbers.join.to_f
-  end
-  @operators = Operator.create(value: @number, category: "plus")
-  @operators.save
-  Number.delete_all(category: "number")
-  erb :index
-end
-
-post '/minus' do
-  numbers = []
-  Number.all.each do |number|
-    numbers << number.number
-    @number = numbers.join.to_f
-  end
-  @operators = Operator.create(value: @number, category: "minus")
-  @operators.save
-  Number.delete_all(category: "number")
-  erb :index
-end
-
-post '/times' do
-  numbers = []
-  Number.all.each do |number|
-    numbers << number.number
-    @number = numbers.join.to_f
-  end
-  @operators = Operator.create(value: @number, category: "times")
-  @operators.save
-  Number.delete_all(category: "number")
-  erb :index
-end
-
-post '/divide' do
-  numbers = []
-  Number.all.each do |number|
-    numbers << number.number
-    @number = numbers.join.to_f
-  end
-  @operators = Operator.create(value: @number, category: "divide")
-  @operators.save
-  Number.delete_all(category: "number")
-  erb :index
-end
 
 post '/equal' do
   numbers = []
@@ -108,10 +87,13 @@ end
 post '/:number' do
   if params[:number] == "decimal"
     numbers = Number.create(number: ".", category: "number")
+  elsif params[:number] == "plus" || params[:number] == "minus" ||
+    params[:number] == "times" || params[:number] == "divide"
+    operators
   else
     numbers = Number.create(number: params[:number], category: "number")
+    numbers.save
   end
-  numbers.save
   erb :index
 end
 
