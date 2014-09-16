@@ -36,14 +36,16 @@ def operators
   erb :index
 end
 
-
-get '/' do
+def clear
+  Number.delete_all(category: "number")
+  Operator.destroy_all
+  Number.create(number: "", category: "number")
   erb :index
 end
 
-post '/clear' do
-  Number.delete_all(category: "number")
-  Operator.destroy_all
+
+get '/' do
+  Number.create(number: "", category: "number")
   erb :index
 end
 
@@ -54,8 +56,12 @@ post '/equal' do
     numbers << number.number
     @equal = numbers.join.to_f
   end
-  @operators = Operator.create(value: @equal, category: "value")
-  @operators.save
+  if @equal.nil?
+    number_nil
+  else
+    @operators = Operator.create(value: @equal, category: "value")
+    @operators.save
+  end
   Number.delete_all(category: "number")
   counter = 0
   @result = Operator.first.value
@@ -90,6 +96,8 @@ post '/:number' do
   elsif params[:number] == "plus" || params[:number] == "minus" ||
     params[:number] == "times" || params[:number] == "divide"
     operators
+  elsif params[:number] == "clear"
+    clear
   else
     numbers = Number.create(number: params[:number], category: "number")
     numbers.save

@@ -3,18 +3,18 @@
 
 
    <div id="screen">
-   <% if @number.nil? && @result.nil? %>
-   <% Number.limit(21).each do |number| %>
-   <span id="number">
-   <%= number.number %>
-   </span>
-   <% end %>
-   <% end %>
-   <% if @number %>
-   <%= @number.to_f.round(5) %>
-   <% end %>
-   <% if @result_display %>
-   <%= @result_display.to_f.round(5) %>
+   <% if @number.nil? && @result_display.nil? %>
+     <% Number.limit(21).each do |number| %>
+     <span id="number">
+       <%= number.number %>
+     </span>
+     <% end %>
+   <% elsif @number && @result_display %>
+     <%= @number.to_f.round(5) %>
+   <% elsif @number && @result_display.nil? %>
+     <%= @number.to_f.round(5) %>
+   <% else %>
+     <%= @result_display.to_f.round(5) %>
    <% end %>
    </div>
 
